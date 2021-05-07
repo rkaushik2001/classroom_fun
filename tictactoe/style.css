@@ -1,0 +1,38 @@
+body {
+  font-family: 'Itim', cursive;
+  font-size: 40px;
+}
+
+section {
+  text-align: center;
+}
+
+.game--container {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  width: 306px;
+  margin: 50px auto;
+}
+
+.cell {
+  font-family: 'Itim', sans-serif;
+  font-weight: bold;
+  width: 100px;
+  height: 100px;
+  box-shadow: 0 0 0 5px #33a8df;
+  border: 5px solid #33a8df;
+  cursor: pointer;
+  line-height: 100px;
+  font-size: 60px;
+}
+
+.game--restart {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
