@@ -4,6 +4,17 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const { v4: uuidV4 } = require('uuid');
 
+
+
+const { ExpressPeerServer } = require("peer");
+const peerServer = ExpressPeerServer(server, {
+debug: true,
+});
+app.use("/peerjs", peerServer);
+
+
+
+
 const room_game={};
 
 app.set('view engine', 'ejs');
@@ -29,7 +40,9 @@ app.get('/:room', (req, res) => {
 
   if(room_game[req.params.room]){
     var game=room_game[req.params.room];
+    console.log(room_game);
   res.render(game, { roomId: req.params.room });
+  
   }
   else{
     console.log("Room not found"); 
@@ -41,6 +54,7 @@ io.on('connection', socket => {
   socket.on('join-room', (roomId, userId) => {
     socket.join(roomId);
     socket.to(roomId).broadcast.emit('user-connected', userId);
+    console.log(userId);
 
     socket.on('disconnect', () => {
       socket.to(roomId).broadcast.emit('user-disconnected', userId);
