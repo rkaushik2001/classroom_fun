@@ -3,32 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/g2_style.css">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
   <script>
-    const ROOM_ID = "<%= roomId %>"
+    const ROOM_ID = "<%= room %>"
   </script>
   <script defer src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
   <script src="/socket.io/socket.io.js" defer></script>
-  <script src="script.js" defer></script>
-  <title>Document</title>
-  <style>
-    #video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, 300px);
-      grid-auto-rows: 300px;
-    }
-    
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-
-    }
-  </style>
+  <script src="js/main.js" defer></script>
+  
+ 
+  <title>ClassRoom Fun</title>
 </head>
 <body>
-  <div id="video-grid"></div>
+
+<div id="video-grid"></div>
+
+<!--- --------------------------------------------------------------->
+<div id="comp">
+    <p id="demo"></p>
+    <p id="role"></p>
+    <!--------->
+    
+    <!----------->
+    <div id="response">
+        <div id="tnd">
+        <label for="truth">Truth</label>
+        <input type="radio" id="truth" name="ans" onclick="show_result('truth')">
+        <label for="dare">Dare</label>
+        <input type="radio" id="dare" name="ans" onclick="show_result('dare')">
+        </div>
+        <input type="button" value="Proceed">
+    </div>
+    </div>
+    <script src="js/g2_main.js"> </script>
+
+
+<!-- --------------------Chat box------------------------------ --> 
+
+  <div class="chat-container">
+    <header class="chat-header">
+      <h1><i class="fas fa-smile"></i> ClassRoom Fun</h1>
+      <a href="/" class="btn">Leave Room</a>
+    </header>
+    <main class="chat-main">
+      <div class="chat-sidebar">
+        <h3><i class="fas fa-comments"></i> Room Name:</h3>
+        <h2 id="room-name"></h2>
+        <h3><i class="fas fa-users"></i> Users</h3>
+        <ul id="users">
+         
+        </ul>
+      </div>
+      <div class="chat-messages" id='chat-content'>
+
+        
+      </div>
+    </main>
+    <div class="chat-form-container">
+      <form id="chat-form">
+        <input
+          id="msg"
+          type="text"
+          placeholder="Enter Message"
+          autocomplete="off"
+          required
+          
+        />
+        <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- --------------------Chat box Ends------------------------------ --> 
+
+  <span id='ejsusername' hidden><%= username%></span>
+	<span id='ejsroom' hidden><%= room%></span>
+	<span id='ejspwd' hidden><%= pwd%></span>
+  <span id='ejsgame' hidden><%= game%></span>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w==" crossorigin="anonymous"></script>
+
+
+
 </body>
 </html>

@@ -1,35 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <div>
-            <form id='game1' action='/game1' method="GET">
-                <button>GAME 1</button>
-            </form>
-        </div>
-        <div>
-            <form id='game2' action='/game2' method="GET">
-                <button>GAME 2</button>
-            </form>
-        </div>
-        <div>
-            <form id='game3' action='/game3' method="GET">
-                <button>GAME 3</button>
-            </form>
-        </div>
-        <div>
-            <form id='game4' action='/game4' method="GET">
-                <button>GAME 4</button>
-            </form>
-        </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+			integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="css/style.css" />
+		<title>ClassRoom Fun</title>
+	</head>
+	<body>
+		<div class="join-container">
+			<header class="join-header">
+				<h1><i class="fas fa-smile"></i> ClassRoom Fun</h1>
+			</header>
+			<main class="join-main">
+				<form action="/join" id="joinForm" method="POST">
+					<div class="form-control">
+						<label for="username">Username</label>
+						<input
+							type="text"
+							name="username"
+							id="username"
+							placeholder="Enter username..."
+							required
+						/>
+					</div>
+					<div class="form-control" id="divChooseRoom">
+						<label for="room">Choose Room</label>
+						<select name="room" id="room">
 
+						</select>
+					</div>
+					<div class="form-control" id="divRoomPassword">
+						<label for="room">Enter Room Password</label>
+						<input type="password" name="pwd" id="roomPassword" style="width:100%; Height:40px; font-size:16px; padding:5px" placeholder="Enter Room Password">
+					</div>
+					<% if(msg=='wp'){ %>
+						<label style='color:red'>Incorrect Password</label>
+					<% }%>
+					<button type="submit" class="btn">Join Game</button>
+					
+				</form>
+				<form action="/create" id="createForm" method="POST">
+					<div class="form-control">
+						<label for="username">Username</label>
+						<input
+							type="text"
+							name="username"
+							id="username"
+							placeholder="Enter username..."
+							required
+						/>
+					</div>
+					<div class="form-control" id='divCreateRoom'>
+						<label for="room">Create Room</label>
+						<input type="text" id="room1" name="room" placeholder="Enter Room Name" required>
+					</div>
+					<div class="form-control" id='divCreatePassword'>
+						<label for="room">Create Room Password</label>
+						<input type="password" id="roomPassword" name="pwd" style="width:100%; Height:40px; font-size:16px; padding:5px" placeholder="Create Password">
+					</div>
+					<div class="form-control" id="divChooseGame">
+						<label for="game">Choose Game</label>
+						<select name="game" id="game">
+							<option value="game1">King-Minister-Thief-Police</option>
+							<option value="game2">Truth Dare</option>
+						</select>
+					</div>
+					
+					<button type="submit" class="btn">Join Game</button>
+					
+				</form>
+				<button class='btn' id="btnCreateRoom" onclick="hideJoin()">Create Room</button>
+				<button class='btn' id="btnJoinRoom" onclick="hideCreate()">Join Room</button>
+			</main>
+		</div>
 
-    </div>
-</body>
+	</body>
+	<script>
+		function hideJoin(){
+			console.log("came inside hideElem function");
+			document.getElementById("createForm").style.display="block";
+			document.getElementById("joinForm").style.display="none";
+			document.getElementById("btnCreateRoom").style.display="none";
+			document.getElementById("btnJoinRoom").style.display="block";
+			
+		}
+		function hideCreate(){
+			document.getElementById("createForm").style.display='none';
+			document.getElementById("joinForm").style.display="block";
+			document.getElementById("btnCreateRoom").style.display="block";
+			document.getElementById("btnJoinRoom").style.display="none";
+		}
+	</script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		const socket = io();
+
+		socket.on('roomList',rooms=>{
+
+			document.getElementById('room').innerHTML = '';
+
+			rooms.forEach(element => {
+				document.getElementById('room').innerHTML += `<option value="${element.room}">${element.room}</option>`;
+			});
+		});
+	</script>
 </html>
