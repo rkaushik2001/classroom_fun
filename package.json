@@ -1,5 +1,5 @@
 {
-  "name": "ClassRoom Fun",
+  "name": "ClassRoomFun",
   "version": "1.0.0",
   "description": "realtime Application for playing games",
   "main": "server.js",
